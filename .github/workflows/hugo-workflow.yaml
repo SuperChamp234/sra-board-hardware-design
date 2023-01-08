@@ -18,7 +18,6 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-
     # Step 1 - Checks-out your repository under $GITHUB_WORKSPACE
     - name: Checkout
       uses: actions/checkout@v2
@@ -32,17 +31,16 @@ jobs:
       with:
           hugo-version: 'latest'
 
-    - name: Move Documents
-      run: cp ./README.md ./website/content/docs/about.md
+    # Step 3 - Clean everything
+    #- name: Clean public directory
+    #  run: rm -rf ./website/public && rm -f ./website/content/docs/*
 
-    # Step 3 - Clean and don't fail
-    - name: Clean public directory
-      run: rm -rf website/public
-
-    # Step 4 - Builds the site using the latest version of Hugo
+    - run: awk '{ gsub("./documentation", "/sra-board-hardware-design/documentation") } 1' README.md > ./website/content/docs/SRA-Board.md && awk '{ gsub("/documentation", "/sra-board-hardware-design/documentation") } 1' ./sensors_2022/lsa/README.md > ./website/content/docs/LSA.md && awk '{ gsub("./documentation", "/sra-board-hardware-design/documentation") } 1' ./sensors_2022/mpu/README.md > ./website/content/docs/MPU.md
+    - run: cp -rf ./documentation ./website/static/
+    #Step 4 - Builds the site using the latest version of Hugo
     # Also specifies the theme we want to use
     - name: Build
-      run: cd website && hugo --theme=hugo-book
+      run: hugo --source=website --theme=hugo-book
 
     # Step 5 - Create name file
     #- name: Create cname file
