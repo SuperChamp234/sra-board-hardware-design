@@ -24,16 +24,5 @@
       <description>TABLE OF CONTENTS # TABLE OF CONTENTS MPU6050 Connection with SRA Board Inertial Measurement Unit Initialising MPU6050 Gyroscope Reading Gyroscope Data Accelerometer Reading Accelerometer Data Accelerometer Euler Angles Complementary Filter Digital Motion Processor Reading Register Data Connection with SRA Board # MPU6050 # The MPU6050 is a 6-axis/6-DOF Motion Tracking Device. It is a Micro Electro-Mechanical System (MEMS). MEMS is a technology defined as miniaturized mechanical and electro-mechanical elements (i.</description>
     </item>
     
-    <item>
-      <title></title>
-      <link>http://sravjti.in/sra-board-hardware-design/docs/sra-board/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://sravjti.in/sra-board-hardware-design/docs/sra-board/</guid>
-      <description>SRA Development Board ESP32-based Development Board KiCAD · Gerber · Images · 3D Model SRA Board 2021-2022 # The SRA board is a development board based on ESP32 with on-board peripherals like programmable LEDs, switches, sensor ports for Line Sensor Array and MPU-6050, protection circuit for over-current and reverse voltage and motor drivers.
-![]/sra-board-hardware-design/documentation/assets/3d_sideview.png)
-Table of Contents # SRA Board 2021-2022 Table of Contents Board Images About the Project Getting Started with a Development Board Major Changes for 2022 Notable problems in the previous SRA Boards (2019) Notable problems in the current SRA Board 2022 3D Models Milestones Contributors Acknowledgements and Resources License Board Images # Frontside Backside About the Project # This development board is used for the Wall-E and MARIO workshops conducted by SRA.</description>
-    </item>
-    
   </channel>
 </rss>
