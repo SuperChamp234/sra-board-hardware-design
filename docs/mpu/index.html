@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TABLE OF CONTENTS # TABLE OF CONTENTS MPU6050 Connection with SRA Board Inertial Measurement Unit Initialising MPU6050 Gyroscope Reading Gyroscope Data Accelerometer Reading Accelerometer Data Accelerometer Euler Angles Complementary Filter Digital Motion Processor Reading Register Data Connection with SRA Board # MPU6050 # The MPU6050 is a 6-axis/6-DOF Motion Tracking Device. It is a Micro Electro-Mechanical System (MEMS). MEMS is a technology defined as miniaturized mechanical and electro-mechanical elements (i.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="" />
+<meta property="og:description" content="TABLE OF CONTENTS # TABLE OF CONTENTS MPU6050 Connection with SRA Board Inertial Measurement Unit Initialising MPU6050 Gyroscope Reading Gyroscope Data Accelerometer Reading Accelerometer Data Accelerometer Euler Angles Complementary Filter Digital Motion Processor Reading Register Data Connection with SRA Board # MPU6050 # The MPU6050 is a 6-axis/6-DOF Motion Tracking Device. It is a Micro Electro-Mechanical System (MEMS). MEMS is a technology defined as miniaturized mechanical and electro-mechanical elements (i." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://sravjti.in/sra-board-hardware-design/docs/mpu/" /><meta property="article:section" content="docs" />
+
+
+<title>Mpu | SRA Board Hardware Design</title>
+<link rel="manifest" href="/sra-board-hardware-design/manifest.json">
+<link rel="icon" href="/sra-board-hardware-design/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/sra-board-hardware-design/book.min.c58292d36b18b675680ab9baea2029204537b839ea72f258746ec0f32ce8d6c8.css" integrity="sha256-xYKS02sYtnVoCrm66iApIEU3uDnqcvJYdG7A8yzo1sg=" crossorigin="anonymous">
+  <script defer src="/sra-board-hardware-design/flexsearch.min.js"></script>
+  <script defer src="/sra-board-hardware-design/en.search.min.0b0dce22377b3b01241f91b9004ec30f56dd97b66312b2cdae3b298aa9f005df.js" integrity="sha256-Cw3OIjd7OwEkH5G5AE7DD1bdl7ZjErLNrjspiqnwBd8=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/sra-board-hardware-design/"><span>SRA Board Hardware Design</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/sra-board-hardware-design/docs/lsa/" class="">Lsa</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/sra-board-hardware-design/docs/mpu/" class="active">Mpu</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/sra-board-hardware-design/docs/sra-board/" class="">Sra Board</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/sra-board-hardware-design/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Mpu</strong>
+
+  <label for="toc-control">
+    
+    <img src="/sra-board-hardware-design/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#pins">Pins</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#initialising-mpu6050">Initialising MPU6050</a>
+      <ul>
+        <li><a href="#gyroscope">Gyroscope</a></li>
+        <li><a href="#reading-gyroscope-data">Reading Gyroscope Data</a></li>
+        <li><a href="#accelerometer">Accelerometer</a></li>
+        <li><a href="#reading-accelerometer-data">Reading Accelerometer Data</a></li>
+        <li><a href="#accelerometer-euler-angles">Accelerometer Euler Angles</a></li>
+        <li><a href="#complementary-filter">Complementary Filter</a></li>
+        <li><a href="#digital-motion-processor-dmp">Digital Motion Processor (DMP)</a></li>
+        <li><a href="#reading-register-data">Reading Register Data</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="table-of-contents">
+  TABLE OF CONTENTS
+  <a class="anchor" href="#table-of-contents">#</a>
+</h1>
+<ul>
+<li><a href="#table-of-contents">TABLE OF CONTENTS</a></li>
+<li><a href="#mpu6050">MPU6050</a></li>
+<li><a href="#connection-with-sra-board">Connection with SRA Board</a></li>
+<li><a href="#inertial-measurement-unit">Inertial Measurement Unit</a></li>
+<li><a href="#initialising-mpu6050">Initialising MPU6050</a>
+<ul>
+<li><a href="#gyroscope">Gyroscope</a></li>
+<li><a href="#reading-gyroscope-data">Reading Gyroscope Data</a></li>
+<li><a href="#accelerometer">Accelerometer</a></li>
+<li><a href="#reading-accelerometer-data">Reading Accelerometer Data</a></li>
+<li><a href="#accelerometer-euler-angles">Accelerometer Euler Angles</a></li>
+<li><a href="#complementary-filter">Complementary Filter</a></li>
+<li><a href="#digital-motion-processor-dmp">Digital Motion Processor</a></li>
+<li><a href="#reading-register-data">Reading Register Data</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="connection-with-sra-board">
+  Connection with SRA Board
+  <a class="anchor" href="#connection-with-sra-board">#</a>
+</h1>
+<img width="599" alt="PNG image" src="https://user-images.githubusercontent.com/72294682/152956585-ac4468b6-e78d-474f-aab1-e3f682476b97.png">
+<h1 id="mpu6050">
+  MPU6050
+  <a class="anchor" href="#mpu6050">#</a>
+</h1>
+<ul>
+<li>The MPU6050 is a <strong>6-axis/6-DOF Motion Tracking Device</strong>.</li>
+<li>It is a <em>Micro Electro-Mechanical System (MEMS)</em>.</li>
+</ul>
+<blockquote>
+<p>MEMS is a technology defined as miniaturized mechanical and electro-mechanical elements (i.e., devices and structures) that are made using the techniques of microfabrication.
+Their dimensions can range from one micron to several millimeters.</p>
+</blockquote>
+<ul>
+<li>The 6050 has both a 3-axis Accelerometer and 3-axis Gyroscope integrated on a single chip.</li>
+<li>It is a commonly used chip that combines a MEMS gyroscope and a MEMS accelerometer and uses a standard I2C bus for data transmission</li>
+<li>The system processor is an I2C master to the MPU6050 (default address is 0x68 but can be changed to 0x69)</li>
+<li>The MPU6050 can also act as an I2C master and directly accept inputs from an external compass</li>
+<li>This is 3.3V device and hence is safe to connect to ESP32 pins directly.</li>
+</ul>
+<p><img src="https://cdn.shopify.com/s/files/1/0014/4313/5560/products/accelerometer-and-gyroscope-mpu6050_1280x.jpg?v=1577794144" alt="MPU6050" /></p>
+<p>To give you some context:</p>
+<blockquote>
+<p>A Gyroscope is a device that measures the rate of change of angular position, aka the rotational velocity, over time in all 3 axes.</p>
+</blockquote>
+<blockquote>
+<p>An accelerometer is a tool that measures acceleration in its own instantaneous rest frame(e.g. an accelerometer at rest on the surface of the Earth will measure an acceleration due to Earth&rsquo;s gravity, straight upwards of g ≈ 9.81 m/s<sup>2</sup> and will measure zero acceleration when in freefall)</p>
+</blockquote>
+<ul>
+<li>When the 6050 is used, it returns 6 values; 3 from the accelerometer and the other 3 from the gyroscope.</li>
+</ul>
+<h1 id="inertial-measurement-unit">
+  Inertial Measurement Unit
+  <a class="anchor" href="#inertial-measurement-unit">#</a>
+</h1>
+<ul>
+<li>These are small devices indicating changing orientation in smartphones, video game remotes, quadcopters, etc.</li>
+<li>The IMU has both a gyroscope which measures angular rate and an accelerometer which measures linear acceleration, and/or compasses (magnetometers)</li>
+<li>The number of sensor inputs in an IMU are referred to as ‘DoF’ (Degrees of Freedom), so a chip with a 3-axis gyroscope and a 3-axis accelerometer would be a 6-DOF IMU.</li>
+</ul>
+<h1 id="contents">
+  Contents
+  <a class="anchor" href="#contents">#</a>
+</h1>
+<ul>
+<li>MPU6050 includes <strong>Digital Motion Processor (DMP)</strong>, which has property to solve complex calculations.</li>
+<li>It also consists of a 16-bit Analog to Digital Converter(ADC) hardware. This enables it to record 3-dimension motion at the same time.</li>
+<li>It has <strong>I2C bus interface</strong> to communicate with various microcontrollers.</li>
+<li>The main feature is that the MPU6050 is less expensive and that it can easily combine with accelerometer and gyroscope.</li>
+</ul>
+<h3 id="pins">
+  Pins
+  <a class="anchor" href="#pins">#</a>
+</h3>
+<p><img src="https://hackster.imgix.net/uploads/attachments/998991/mpu6050-pinout_yCBm0odT11.png?auto=compress%2Cformat&amp;w=680&amp;h=510&amp;fit=max" alt="Pins" /></p>
+<p>The MPU-6050 module has 8 pins,</p>
+<p><code>VCC</code>: Power supply pin. Connect this pin to +5V DC supply.</p>
+<p><code>GND</code>: Ground pin. Connect this pin to ground connection.</p>
+<p><code>SCL</code>: Serial Clock pin. Connect this pin to the microcontroller&rsquo;s SCL pin.</p>
+<p><code>SDA</code>: Serial Data pin. Connect this pin to the microcontroller&rsquo;s SDA pin.</p>
+<p><code>XDA</code>: Auxiliary Serial Data pin. This pin is used to connect other I2C interface enabled sensors&rsquo; SDA pin to MPU-6050.</p>
+<p><code>XCL</code>: Auxiliary Serial Clock pin. This pin is used to connect other I2C interface enabled sensors&rsquo; SCL pin to MPU-6050.</p>
+<p><code>AD0</code>: I2C Slave Address LSB pin. This is 0th bit in 7-bit slave address of device. If connected to VCC, then read as logic one and slave address changes.</p>
+<p><code>INT</code>: Interrupt digital output pin.</p>
+<hr>
+<h1 id="working-of-the-6050">
+  Working of the 6050
+  <a class="anchor" href="#working-of-the-6050">#</a>
+</h1>
+<h2 id="initialising-mpu6050">
+  Initialising MPU6050
+  <a class="anchor" href="#initialising-mpu6050">#</a>
+</h2>
+<ul>
+<li>A sample wiring of the device to ESP32 looks as follows:</li>
+</ul>
+<p><img src="https://lh5.googleusercontent.com/OiTQl8mZl41Dwa_Nb6PD6yzMigvv6xV7KnY7bfW56dBSoYuK8shYet7VMev0rVWcFWhirvUIenbFn_B6jc_nmTulH4-3vInHrOZX3sW4f2lBvel_HcthTW_O89FAGwankOtBBJ8aLhY" alt="" /></p>
+<ul>
+<li>When powered up, MPU6050 will start in SLEEP mode. To use it, we need to first disable this SLEEP mode</li>
+<li>To use the I2C protocol, we send the value 0 to register PWR_MGMT_1 (0x6b)</li>
+<li>The procedure to do so is as follows :
+<ol>
+<li>Send a start sequence</li>
+<li>Send the I2C address (0x68) of the MPU6050 with the R/W bit high</li>
+<li>Send the internal register number you want to write to (0x6b : PWR_MGMT_1)</li>
+<li>Send the data byte (0x00) - This will power on the device</li>
+<li>Send the stop sequence</li>
+</ol>
+</li>
+</ul>
+<p><img src="https://lh5.googleusercontent.com/HsUgcO1ojRlHZgbtl1Pyk7aWiUjs1x7XnhI5oYsa8C2gCqAbfqOGpr9fnjk0TBxWHmoIfJEQLqHUqe4Kh3KsjMLKSHAD6jQMsiEwrNyA3KLSeHiNLC3tDjzjAKN_nENu8FMp0tYS60E" alt="" /></p>
+<p>The data byte 0x00 sets all the bits of register 107 to 0, thus disabling SLEEP mode and CYCLE mode, and powering on the MPU-6050</p>
+<p><img src="https://lh3.googleusercontent.com/4p2RF-ezjP6jtT6S7xBQGfls0bcj7JM27W_ZsgRj5pYGQKBnrHfP85MtPncMeuu5qmSEupHdCSu2qPf4TSSBbejcN5MMqU5gLvLMaUDsw9K-Zp7vwLNIiD42d8xdfBKu0A0qxFaS6jk" alt="" /></p>
+<p>There are various terms related with the Pulse Width Modulation:-</p>
+<ul>
+<li><strong>Off-Time</strong> :- Duration of time period when the signal is low.</li>
+<li><strong>ON-Time</strong>  :- Duration of time period when the signal is high.</li>
+<li><strong>Duty cycle</strong> :- It is the percentage of the time period when the signal remains ON during the period of the pulse width modulation signal.</li>
+<li><strong>Period</strong> :- It is the sum of off-time and on-time of pulse width modulation signal.</li>
+</ul>
+<h3 id="gyroscope">
+  Gyroscope
+  <a class="anchor" href="#gyroscope">#</a>
+</h3>
+<p><img src="https://www.electronicwings.com/public/images/user_images/images/Sensor%20%26%20Modules/MPU6050/2_Oreintation_Polarity_of_Rotation_MPU6050.PNG" alt="" /></p>
+<ul>
+<li>
+<p>When the gyros are rotated about any of the sense axes, the C<em>oriolis Effect</em> causes a vibration that is detected by a MEM inside MPU6050.</p>
+</li>
+<li>
+<p>The resulting signal is amplified, demodulated, and filtered to produce a voltage that is proportional to the angular rate.</p>
+</li>
+<li>
+<p>This voltage is digitized using 16-bit ADC to sample each axis.</p>
+</li>
+<li>
+<p>The full-scale range of output are <strong>+/- 250, +/- 500, +/- 1000, +/- 2000.</strong></p>
+</li>
+<li>
+<p>It measures the angular velocity along each axis in <em>degree per second</em> units.</p>
+</li>
+</ul>
+<h3 id="reading-gyroscope-data">
+  Reading Gyroscope Data
+  <a class="anchor" href="#reading-gyroscope-data">#</a>
+</h3>
+<ul>
+<li>The acceleration of the three axes, X,Y and Z, are stored in 3 pairs of registers on the MPU6050</li>
+<li>Each register on the MPU6050 is an 8-bit register</li>
+<li>In each of these pairs, one register stores the MSB (most significant bit) and the other stores the LSB (least significant bit)</li>
+<li>These 6 registers are <a href="#reading-register-data">burst-read</a> and the 8-bit MSB and LSB bytes for each axis are combined to give a single 16-bit float</li>
+<li>The gyroscope has a sensitivity factor of about 131, i.e. 1 degree of rotation gives a reading of 131 units</li>
+<li>Therefore, the degrees of rotation are obtained by dividing the raw readings by 131</li>
+<li>Euler angles are calculated by integrating raw readings of each axis over time</li>
+</ul>
+<p><img src="https://lh3.googleusercontent.com/dQ-SZL7kp5WEnFb-KXFH-FDvF7yv_2J28ycODkipFfFAAMN1lYAk0rPzKg7DaPcNDYk-BdUEJQSzApxxESam_7tnbsIOcLenjofFoUiCpAhsyuMtkWaFMcZPJrK5EMJyX9GCNHSNeeo" alt="" /></p>
+<h3 id="accelerometer">
+  Accelerometer
+  <a class="anchor" href="#accelerometer">#</a>
+</h3>
+<p><img src="https://www.electronicwings.com/public/images/user_images/images/Sensor%20%26%20Modules/MPU6050/3_Angle_of_Inclination.png" alt="Tilt" /></p>
+<p><img src="https://camo.githubusercontent.com/10eb856f2ada00b1514210c1d2005d174bc4179e601a59aa4f6a83001da0e51d/68747470733a2f2f6c6173746d696e757465656e67696e656572732e636f6d2f77702d636f6e74656e742f75706c6f6164732f61726475696e6f2f4d454d532d416363656c65726f6d657465722d576f726b696e672e676966" alt="Accelerometer" /></p>
+<ul>
+<li>The MPU6050 uses a MEMS accelerometer, which consists of stationary and movable electrodes acting as <strong>capacitor plates</strong></li>
+<li>Acceleration along the axes deflects the movable mass. It produces change in g-forces on the moving device, which causes displacement of the movable capacitor plates.</li>
+<li>This displacement of moving plate (mass) unbalances the differential capacitor, which causes a change in the capacitance, which is then detected internally by change in voltage. This in turn results in sensor output. Output amplitude is proportional to acceleration.</li>
+<li>16-bit ADC is used to get digitized output.</li>
+<li>The full-scale range of acceleration are <strong>+/- 2g, +/- 4g, +/- 8g, +/- 16g.</strong></li>
+<li>It is measured in <em>g (gravity force)</em> unit; for example when the device is placed on a flat surface, it will measure 0g on X and Y axes and +1g on Z axis.</li>
+</ul>
+<h3 id="reading-accelerometer-data">
+  Reading Accelerometer Data
+  <a class="anchor" href="#reading-accelerometer-data">#</a>
+</h3>
+<ul>
+<li>The acceleration of the three axes, X,Y and Z, are stored in 3 pairs of registers on the MPU6050</li>
+<li>Each register on the MPU6050 is an 8-bit register</li>
+<li>In each of these pairs, one register stores the MSB (most significant bit) and the other stores the LSB (least significant bit)</li>
+<li>These 6 registers are <a href="#reading-register-data">burst-read</a> and the 8-bit MSB and LSB bytes for each axis are combined to give a single 16-bit float</li>
+</ul>
+<h3 id="accelerometer-euler-angles">
+  Accelerometer Euler Angles
+  <a class="anchor" href="#accelerometer-euler-angles">#</a>
+</h3>
+<ul>
+<li>The roll and pitch angles are calculated from the accelerometer using the <a href="https://www.digikey.com/en/articles/using-an-accelerometer-for-inclination-sensing">formula</a> below :</li>
+</ul>
+<img src="https://render.githubusercontent.com/render/math?math=\theta = \arctan(\frac{A_{X.OUT}}{A_{Y.OUT}})">
+<h3 id="complementary-filter">
+  Complementary Filter
+  <a class="anchor" href="#complementary-filter">#</a>
+</h3>
+<ul>
+<li>Since gyroscopic drift accumulates over time, it is necessary to reset the rate readings from the gyroscope at frequent intervals, so the drift can be minimised</li>
+<li>To do this, we combine both the gyroscope and accelerometer readings in a weighted average</li>
+<li>The value of alpha is determined experimentally</li>
+<li><a href="http://www.pieter-jan.com/images/equations/CompFilter_Eq.gif">Formula</a>:</li>
+</ul>
+<p><img src="http://www.pieter-jan.com/images/equations/CompFilter_Eq.gif" alt="" /></p>
+<h3 id="digital-motion-processor-dmp">
+  Digital Motion Processor (DMP)
+  <a class="anchor" href="#digital-motion-processor-dmp">#</a>
+</h3>
+<ul>
+<li>Since the 6050 has multiple sensors, the input from these sensors can be fed into various complex algorithms that take raw data and convert it into extremely useful values(like an Inertial Navigation System as used in drones).</li>
+</ul>
+<blockquote>
+<p>Note that gyroscope and accelerometer sensor data of MPU6050 module consists of 16-bit raw data in 2’s complement form.</p>
+</blockquote>
+<ul>
+<li>These algorithms are known as Fusion algorithms since they take input from multiple sensor types.</li>
+<li>The only problem is that these algorithms are:
+<ul>
+<li>hard to understand since they contain a lot of mathematics and tend to be complicated, and</li>
+<li>demanding in RAM because of the amount of calculations that they require.</li>
+</ul>
+</li>
+<li>This means that these algorithms are barely able to run on a relatively simple controller.</li>
+</ul>
+<p>This is where the DMP comes in.</p>
+<ul>
+<li>The MPU-6050 DMP is quite sophisticated. It supports <strong>3D motion processing and gesture recognition algorithms</strong>. It even reports temperature, and if you connect an external magnetometer, the DMP can also give you heading information.</li>
+<li>It is a motion sensing device that solve the problem mentioned above by running fusion algorithms internally.</li>
+<li>Hence, the SRA Board will be able to receive clean and reliable &ldquo;fused&rdquo; motion information from the module, instead of noisy motion data.</li>
+</ul>
+<h3 id="reading-register-data">
+  Reading Register Data
+  <a class="anchor" href="#reading-register-data">#</a>
+</h3>
+<ul>
+<li>To read/receive data from a slave, the master has to first send a START condition addressing the MPU6050</li>
+<li>Then the master must WRITE the requested register from which the data is to be read</li>
+<li>After this, instead of sending a STOP condition to stop the WRITE operation and then sending a consecutive START condition to start the READ operation,
+the I2C bus provides the <strong>repeated start</strong> functionality, wherein instead of sending a STOP-START condition, we send only a START condition and read the
+specified number of bytes from the register.</li>
+<li>The procedure to do so is as follows :
+<ol>
+<li>Send a start sequence</li>
+<li>Send the I2C address (0x68) of the MPU6050 with the R/W bit low - This writes to the device</li>
+<li>Send the Internal register address you want to read from</li>
+<li>Send a start sequence again (repeated start)</li>
+<li>Send the I2C address of the device with the R/W bit high - This reads from the device</li>
+<li>Read the number of the requested data bytes from the registers</li>
+<li>Send the stop sequence.</li>
+<li>All write and read operations (except the last read) are answered with a ACK if successful.</li>
+</ol>
+</li>
+</ul>
+<p><img src="http://www.i2c-bus.org/static/i2c/repeatedstart.gif" alt="" /></p>
+<p><img src="https://i.stack.imgur.com/FHPKk.png" alt="" /></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#pins">Pins</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#initialising-mpu6050">Initialising MPU6050</a>
+      <ul>
+        <li><a href="#gyroscope">Gyroscope</a></li>
+        <li><a href="#reading-gyroscope-data">Reading Gyroscope Data</a></li>
+        <li><a href="#accelerometer">Accelerometer</a></li>
+        <li><a href="#reading-accelerometer-data">Reading Accelerometer Data</a></li>
+        <li><a href="#accelerometer-euler-angles">Accelerometer Euler Angles</a></li>
+        <li><a href="#complementary-filter">Complementary Filter</a></li>
+        <li><a href="#digital-motion-processor-dmp">Digital Motion Processor (DMP)</a></li>
+        <li><a href="#reading-register-data">Reading Register Data</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

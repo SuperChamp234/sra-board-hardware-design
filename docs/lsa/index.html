@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="LSA - Line Sensor Array # Table of Contents # Overview Features Components of LSA Function of Components LED PhotoDiode IC LM324 Resistors Connections Working Principle Appplications Scope of Improvement Overview # The Line Sensor Array(LSA) is used to detect the white/black lined surface and it sends this data to the microcontroller ESP-32. Analyzing and processing the data received by the microcontroller ESP-32, the purpose of line following is achieved.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="" />
+<meta property="og:description" content="LSA - Line Sensor Array # Table of Contents # Overview Features Components of LSA Function of Components LED PhotoDiode IC LM324 Resistors Connections Working Principle Appplications Scope of Improvement Overview # The Line Sensor Array(LSA) is used to detect the white/black lined surface and it sends this data to the microcontroller ESP-32. Analyzing and processing the data received by the microcontroller ESP-32, the purpose of line following is achieved." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://sravjti.in/sra-board-hardware-design/docs/lsa/" /><meta property="article:section" content="docs" />
+
+
+<title>Lsa | SRA Board Hardware Design</title>
+<link rel="manifest" href="/sra-board-hardware-design/manifest.json">
+<link rel="icon" href="/sra-board-hardware-design/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/sra-board-hardware-design/book.min.c58292d36b18b675680ab9baea2029204537b839ea72f258746ec0f32ce8d6c8.css" integrity="sha256-xYKS02sYtnVoCrm66iApIEU3uDnqcvJYdG7A8yzo1sg=" crossorigin="anonymous">
+  <script defer src="/sra-board-hardware-design/flexsearch.min.js"></script>
+  <script defer src="/sra-board-hardware-design/en.search.min.0b0dce22377b3b01241f91b9004ec30f56dd97b66312b2cdae3b298aa9f005df.js" integrity="sha256-Cw3OIjd7OwEkH5G5AE7DD1bdl7ZjErLNrjspiqnwBd8=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/sra-board-hardware-design/"><span>SRA Board Hardware Design</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/sra-board-hardware-design/docs/lsa/" class="active">Lsa</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/sra-board-hardware-design/docs/mpu/" class="">Mpu</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/sra-board-hardware-design/docs/sra-board/" class="">Sra Board</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/sra-board-hardware-design/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Lsa</strong>
+
+  <label for="toc-control">
+    
+    <img src="/sra-board-hardware-design/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#lsa---line-sensor-array">LSA - Line Sensor Array</a>
+      <ul>
+        <li><a href="#table-of-contents">Table of Contents</a></li>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#components-of-lsa">Components of LSA</a></li>
+        <li><a href="#function-of-components">Function of Components</a></li>
+        <li><a href="#connections">Connections</a></li>
+        <li><a href="#working-principle">Working Principle</a></li>
+        <li><a href="#applications">Applications</a></li>
+        <li><a href="#scope-of-improvement">Scope of Improvement</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h2 id="lsa---line-sensor-array">
+  LSA - Line Sensor Array
+  <a class="anchor" href="#lsa---line-sensor-array">#</a>
+</h2>
+<h3 id="table-of-contents">
+  Table of Contents
+  <a class="anchor" href="#table-of-contents">#</a>
+</h3>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#components-of-lsa">Components of LSA</a></li>
+<li><a href="#function-of-components">Function of Components</a>
+<ul>
+<li><a href="#function-of-components">LED</a></li>
+<li><a href="#function-of-components">PhotoDiode</a></li>
+<li><a href="#function-of-components">IC LM324</a></li>
+<li><a href="#function-of-components">Resistors</a></li>
+</ul>
+</li>
+<li><a href="#connections">Connections</a></li>
+<li><a href="#working-principle">Working Principle</a></li>
+<li><a href="#applications">Appplications</a></li>
+<li><a href="#scope-of-improvement">Scope of Improvement</a></li>
+</ul>
+<h3 id="overview">
+  Overview
+  <a class="anchor" href="#overview">#</a>
+</h3>
+<ul>
+<li>
+<p>The Line Sensor Array(LSA) is used to detect the white/black lined surface and it sends this data to the microcontroller ESP-32. Analyzing and processing the data received by the microcontroller ESP-32, the purpose of line following is achieved.</p>
+</li>
+<li>
+<p>Physical PCB</p>
+</li>
+</ul>
+<p align="center">
+<img src="/sra-board-hardware-design/documentation/images/LSA_images/Lsa_front.png" width="600" height = "350">
+</p>
+<ul>
+<li>PCB Backside</li>
+</ul>
+<p align="center">
+<img src="/sra-board-hardware-design/documentation/images/LSA_images/Lsa_back.png" width="600" height = "350">
+</p>
+<h3 id="features">
+  Features
+  <a class="anchor" href="#features">#</a>
+</h3>
+<ul>
+<li>Components used are readily available.</li>
+<li>Easy connections for output signals.</li>
+<li>Compact enough to fit into any project.</li>
+<li>Distinguished trace widths for Signal and Power Routes.</li>
+</ul>
+<h3 id="components-of-lsa">
+  Components of LSA
+  <a class="anchor" href="#components-of-lsa">#</a>
+</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Description</th>
+<th>Quantity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LED</td>
+<td>Emits light</td>
+<td>4</td>
+</tr>
+<tr>
+<td>PhotoDiode</td>
+<td>Absorbs light</td>
+<td>4</td>
+</tr>
+<tr>
+<td>IC LM324</td>
+<td>Op.Amp. IC</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Resistors</td>
+<td>Limit Current</td>
+<td>8</td>
+</tr>
+<tr>
+<td>JST Connector</td>
+<td>Connect PCB with other circuits</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-of-components">
+  Function of Components
+  <a class="anchor" href="#function-of-components">#</a>
+</h3>
+<ul>
+<li>
+<p><strong>LED</strong></p>
+<ul>
+<li>LSA consists of Four LED and PhotoDiode Pairs. The specific LED&rsquo;s emit white light which is incident on the surface and some of it is absorbed by the surface. The voltage source For the LEDs to glow is VCC.</li>
+</ul>
+</li>
+<li>
+<p><strong>PhotoDiode</strong></p>
+<ul>
+<li>Based upon the reflectivity coefficient of the surface( generally less than 1), the remaining light reflected from the surface is captured by the Photodiodes. LEDs and complimentary photodiodes are used to efficiently detect the surface (white/black line) as the environment also contains unwanted light for the LSA sensor. The amount of light received is directly proportional to the current generated by it. More the light, more the current, more the reading.</li>
+</ul>
+</li>
+<li>
+<p>IC LM324</p>
+<ul>
+<li>This is a Quad(4) OP.Amp. IC. Op.Amp i.e Operation Amplifiers amplify the current with constant volatge. Since the current reading from photo diodes is significantly small and difficult to compare, it needs to be amplified. The 4 amplified outputs serve as raw readings of LSA.</li>
+</ul>
+</li>
+<li>
+<p>Resistors</p>
+<ul>
+<li>Now to limit the current and thus to protect the LEDs, PhotoDiodes current limiting resistors are used.</li>
+</ul>
+</li>
+</ul>
+<h3 id="connections">
+  Connections
+  <a class="anchor" href="#connections">#</a>
+</h3>
+<p>To connect LSA with the SRA Board, connect the JST connector in the following way:</p>
+<p align="center">
+<img src="https://github.com/omsheladia/sra-board-hardware-design/blob/master/sra-board-hardware-design/documentation/images/LSA_images/lsaconn.png?raw=true" width="400" height = "550"> 
+</p>
+<h3 id="working-principle">
+  Working Principle
+  <a class="anchor" href="#working-principle">#</a>
+</h3>
+<ul>
+<li>LSA works on the principle of reflectivity of light for different types of surfaces.
+<ul>
+<li>Black Surface -&gt; HIGH absorptivity -&gt; LESS reflectivity</li>
+<li>White Surface -&gt; LOW absorptivity -&gt; HIGH reflectivity</li>
+</ul>
+</li>
+<li>Demonstration</li>
+</ul>
+<p align="center">
+<img src="https://github.com/omsheladia/sra-board-hardware-design/blob/master/sra-board-hardware-design/documentation/images/LSA_images/lsa_reflectivity.gif?raw=true" width="650" height="500"> 
+</p>
+<h3 id="applications">
+  Applications
+  <a class="anchor" href="#applications">#</a>
+</h3>
+<ul>
+<li>Obstacle detection on a clear path.</li>
+<li>Line Following.</li>
+<li>Distinguish Colours on a path.</li>
+</ul>
+<h3 id="scope-of-improvement">
+  Scope of Improvement
+  <a class="anchor" href="#scope-of-improvement">#</a>
+</h3>
+<ul>
+<li>LSA sometimes provides slightly inaccurate readings due to external light and conditions due to non uniformity of the colour of the path. Therefore, LSA has low accuracy. Hence LSA should be kept close to the ground.</li>
+<li>As of now only white and black surfaces are being mapped. Given accurate sensors and proper mapping we can map LSA for any range of RGB colours.</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#lsa---line-sensor-array">LSA - Line Sensor Array</a>
+      <ul>
+        <li><a href="#table-of-contents">Table of Contents</a></li>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#components-of-lsa">Components of LSA</a></li>
+        <li><a href="#function-of-components">Function of Components</a></li>
+        <li><a href="#connections">Connections</a></li>
+        <li><a href="#working-principle">Working Principle</a></li>
+        <li><a href="#applications">Applications</a></li>
+        <li><a href="#scope-of-improvement">Scope of Improvement</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
