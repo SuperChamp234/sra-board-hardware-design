@@ -35,7 +35,7 @@ jobs:
     #- name: Clean public directory
     #  run: rm -rf ./website/public && rm -f ./website/content/docs/*
 
-    - run: awk '{ gsub("./documentation", "/sra-board-hardware-design/documentation") } 1' README.md > ./website/content/docs/SRA-Board.md && awk '{ gsub("/documentation", "/sra-board-hardware-design/documentation") } 1' ./sensors_2022/lsa/README.md > ./website/content/docs/LSA.md && awk '{ gsub("./documentation", "/sra-board-hardware-design/documentation") } 1' ./sensors_2022/mpu/README.md > ./website/content/docs/MPU.md
+    - run: awk '{ gsub("./documentation", "/sra-board-hardware-design/documentation") } 1' README.md > ./website/content/_index.md && awk '{ gsub("/documentation", "/sra-board-hardware-design/documentation") } 1' ./sensors_2022/lsa/README.md > ./website/content/docs/LSA.md && awk '{ gsub("./documentation", "/sra-board-hardware-design/documentation") } 1' ./sensors_2022/mpu/README.md > ./website/content/docs/MPU.md
     - run: cp -rf ./documentation ./website/static/
     #Step 4 - Builds the site using the latest version of Hugo
     # Also specifies the theme we want to use

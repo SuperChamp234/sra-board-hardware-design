@@ -2,7 +2,10 @@ baseURL = 'http://sravjti.in/sra-board-hardware-design'
 languageCode = 'en-us'
 title = 'SRA Board Hardware Design'
 
+[params]
+BookRepo = 'https://github.com/SRA-VJTI/sra-board-hardware-design'
 [markup.goldmark.renderer] 
     unsafe= true
+    BookTheme = 'auto'
 [static]
     staticDir="../documentation"
