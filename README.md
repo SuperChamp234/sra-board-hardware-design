@@ -1,4 +1,3 @@
-<!-- PROJECT LOGO -->
 [![Stargazers][stars-shield]][stars-url]
 [![Forks][forks-shield]][forks-url]
 [![Issues][issues-shield]][issues-url]
