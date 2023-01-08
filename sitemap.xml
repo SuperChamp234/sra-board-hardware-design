@@ -2,14 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://example.org/docs/about/</loc>
+    <loc>http://sravjti.in/sra-board-hardware-design/categories/</loc>
   </url><url>
-    <loc>http://example.org/categories/</loc>
+    <loc>http://sravjti.in/sra-board-hardware-design/</loc>
   </url><url>
-    <loc>http://example.org/docs/</loc>
-  </url><url>
-    <loc>http://example.org/</loc>
-  </url><url>
-    <loc>http://example.org/tags/</loc>
+    <loc>http://sravjti.in/sra-board-hardware-design/tags/</loc>
   </url>
 </urlset>
